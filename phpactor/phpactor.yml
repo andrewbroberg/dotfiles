@@ -1,0 +1,6 @@
+indexer:
+  exclude_patterns:
+    - "\/vendor\/**\/Tests\/**\/*"
+    - "\/vendor\/**\/tests\/**\/*"
+    - "\/vendor\/composer\/**\/*"
+    - "build\/**\/*"

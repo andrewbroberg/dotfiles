@@ -1,0 +1,40 @@
+- defaults:
+    link:
+      relink: true
+
+- clean: ["~"]
+
+- create:
+    - ~/.composer
+    - ~/.config
+    - ~/intelephense
+    - ~/code
+    - ~/.vim/undo-history
+
+- link:
+    ~/.config/nvim: nvim
+    ~/.config/ghostty: ghostty
+    ~/Library/Application Support/lazygit/config.yml: lazygit/config.yml
+    ~/.composer/composer.json: composer/composer.json
+    ~/.gitignore_global: git/gitignore_global
+    ~/scripts: scripts
+    ~/.tmux.conf: tmux/tmux.conf
+    ~/.zshrc: zsh/zshrc
+    ~/.gitconfig: git/gitconfig
+    ~/.ssh/config: ssh/config
+    ~/.config/phpactor: phpactor
+    ~/.aerospace.toml: .aerospace.toml
+    ~/.config/starship.toml : starship.toml
+
+- shell:
+    - description: Install submodules
+      command: "git submodule update --init --recursive"
+    - description: Install TPM
+      command: '[ ! -d "~/.tmux/plugins/tpm" ] || git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm'
+    - description: Installing ZSH plugins
+      command: "zsh/zsh-plugins.sh"
+    - description: Install MacOS Defaults
+      command: "shell/macos/defaults.sh"
+
+- brewfile:
+    - Brewfile

@@ -1,0 +1,173 @@
+#--------------------------------------------------------------------------
+# Oh My Zsh
+#--------------------------------------------------------------------------
+
+export ZSH=$HOME/.oh-my-zsh
+
+ZSH_THEME=""
+HYPHEN_INSENSITIVE="true"
+COMPLETION_WAITING_DOTS="true"
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=145'
+HIST_STAMPS="yyyy-mm-dd"
+VI_MODE_SET_CURSOR=true
+VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
+
+plugins=(
+    artisan
+    npm
+    composer
+    cp
+    dnf
+    docker
+    docker-compose
+    git
+    httpie
+    rsync
+    z
+    zsh-syntax-highlighting
+    zsh-autosuggestions
+)
+
+source $ZSH/oh-my-zsh.sh
+#--------------------------------------------------------------------------
+# Configuration
+#--------------------------------------------------------------------------
+
+# Decrease delay that vi-mode waits for the end of a key sequence
+export KEYTIMEOUT=15
+export ANDROID_HOME=$HOME/Library/Android/sdk && export PATH=$PATH:$ANDROID_HOME/emulator && export PATH=$PATH:$ANDROID_HOME/platform-tools
+typeset -U path cdpath fpath
+path=(
+    $HOME/bin
+    $HOME/scripts
+    /opt/homebrew/bin
+    $HOME/.local/bin
+    $HOME/.config/composer/vendor/bin
+    $HOME/.go/bin
+    $HOME/.cargo/bin
+    ./vendor/bin
+    $HOME/.tmux/plugins/tmuxifier/bin/
+    $path
+)
+
+setopt auto_cd
+cdpath=(
+    $HOME/code
+)
+
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*:descriptions' format %d
+zstyle ':completion:*:descriptions' format %B%d%b
+zstyle ':completion:*:complete:(cd|pushd):*' tag-order \
+    'local-directories named-directories'
+
+export EDITOR=nvim
+export GIT_EDITOR=nvim
+export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
+export ARTISAN_OPEN_ON_MAKE_EDITOR=nvr
+export FZF_DEFAULT_COMMAND='ag -u -g ""'
+export FZF_DEFAULT_OPTS='
+--border=rounded
+--padding=0,1
+--margin=4,10
+--color=dark
+--color=fg:-1,bg:-1,hl:#c678dd,fg+:#ffffff,bg+:#4b5263,hl+:#61afef
+--color=info:#98c379,prompt:#61afef,pointer:#be5046,marker:#e5c07b,spinner:#61afef,header:#61afef,gutter:-1,border:#1f2335
+'
+
+unsetopt sharehistory
+
+#--------------------------------------------------------------------------
+# Aliases
+#--------------------------------------------------------------------------
+
+alias vim="nvim"
+alias cat="bat"
+alias sail='[ -f sail ] && sail || vendor/bin/sail'
+
+# Laravel
+alias a="artisan"
+alias tinker="artisan tinker"
+alias seed="artisan db:seed"
+alias serve="artisan serve"
+alias mfs="artisan migrate:fresh --seed"
+
+# Git
+alias g="git"
+alias gs="git s"
+alias co="git checkout"
+alias main='git checkout $([ `git rev-parse --quiet --verify master` ] && echo "master" || echo "main")'
+alias wip='git commit -m "wip"'
+
+nah() {
+    git reset --hard
+
+    if [[ $1 == "-f" ]]; then
+        git clean -df
+    fi
+}
+
+alias composer="herd composer"
+alias php="herd php"
+
+# Docker
+alias d="docker"
+alias dc="docker compose"
+
+alias pf="phpunit --filter"
+alias lg="lazygit"
+
+composer-link() {
+    composer config minimum-stability dev
+    local package=`echo $1 | sed -nr 's/.*\/([^\/]+)$/\1/p'`
+    composer config "repositories.$package" '{"type": "path", "url": "'$1'"}'
+}
+
+composer-github() {
+    composer config minimum-stability dev
+    local package=`echo $1 | sed -nr 's/.*\/(.*)\.git/\1/p'`
+    composer config "repositories.$package" vcs $1
+}
+
+#--------------------------------------------------------------------------
+# Miscellaneous
+#--------------------------------------------------------------------------
+
+### Fix slowness of pastes with zsh-syntax-highlighting.zsh
+pasteinit() {
+  OLD_SELF_INSERT=${${(s.:.)widgets[self-insert]}[2,3]}
+  zle -N self-insert url-quote-magic # I wonder if you'd need `.url-quote-magic`?
+}
+
+pastefinish() {
+  zle -N self-insert $OLD_SELF_INSERT
+}
+zstyle :bracketed-paste-magic paste-init pasteinit
+zstyle :bracketed-paste-magic paste-finish pastefinish
+
+autoload -U add-zsh-hook
+
+# Herd injected PHP binary.
+export PATH="$HOME/Library/Application Support/Herd/bin/":$PATH
+
+if [[ -f "$HOME/.zshrc_local" ]]; then
+  source "$HOME/.zshrc_local"
+fi
+
+eval "$(starship init zsh)"
+eval "$(tmuxifier init -)"
+
+# Herd injected NVM configuration
+export NVM_DIR="/Users/andrew/Library/Application Support/Herd/config/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+
+[[ -f "/Applications/Herd.app/Contents/Resources/config/shell/zshrc.zsh" ]] && builtin source "/Applications/Herd.app/Contents/Resources/config/shell/zshrc.zsh"
+
+# Herd injected PHP 8.4 configuration.
+export HERD_PHP_84_INI_SCAN_DIR="/Users/andrew/Library/Application Support/Herd/config/php/84/"
+
+# Herd injected PHP 8.3 configuration.
+export HERD_PHP_83_INI_SCAN_DIR="/Users/andrew/Library/Application Support/Herd/config/php/83/"
+
+# Herd injected PHP 8.2 configuration.
+export HERD_PHP_82_INI_SCAN_DIR="/Users/andrew/Library/Application Support/Herd/config/php/82/"
