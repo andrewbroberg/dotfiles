@@ -50,6 +50,7 @@
   "oil.nvim": { "branch": "master", "commit": "ab887d926c2665a708fbe9e6c4654042cc5f4c60" },
   "onedarkpro.nvim": { "branch": "main", "commit": "c96c21800e94630e6871981e75245caaa1b31bb7" },
   "onehalf": { "branch": "master", "commit": "75eb2e97acd74660779fed8380989ee7891eec56" },
+  "onenord.nvim": { "branch": "main", "commit": "babdcc3da92f0c90703bb612a13a58e5f7669287" },
   "phpactor.nvim": { "branch": "main", "commit": "f4aba0b309f74b015f4a19a07e2befd6f1a0e6ca" },
   "plenary.nvim": { "branch": "master", "commit": "857c5ac632080dba10aae49dba902ce3abf91b35" },
   "refactoring.nvim": { "branch": "master", "commit": "36bd14ddd7ebf0546c15e6088e8bc93f8a98787d" },

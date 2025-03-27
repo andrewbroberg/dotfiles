@@ -1,6 +1,6 @@
-theme = light:catppuccin-latte.conf,dark:catppuccin-mocha.conf
-font-size = 15
-adjust-cell-height = 25
+theme = light:onenord-light,dark:onenord
+font-size = 14
+adjust-cell-height = 20
 cursor-style = bar
 cursor-style-blink = false
 background-opacity = 1
