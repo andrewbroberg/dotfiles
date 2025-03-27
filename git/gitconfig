@@ -1,6 +1,7 @@
 [user]
 	name = Andrew Broberg
 	email = andrew@broberg.id.au
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAKag3lQCHLKuJJrUvnAcms08WnFbd3piO/hApDlEQoR
 [alias]
     pul = pull
     pus = push
@@ -93,3 +94,7 @@
     rebase = false
 [init]
     defaultBranch = main
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
