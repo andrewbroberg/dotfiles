@@ -36,9 +36,6 @@ return {
                 require("neotest-phpunit")({
                     root_ignore_files = { "tests/Pest.php" },
                     filter_dirs = { "vendor" },
-                    phpunit_cmd = function()
-                        return "herdphpunit"
-                    end
                 }),
                 require("neotest-jest")({
                     jestCommand = "npm test --",
