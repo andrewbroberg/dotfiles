@@ -63,7 +63,7 @@ zstyle ':completion:*:complete:(cd|pushd):*' tag-order \
 
 export EDITOR=nvim
 export GIT_EDITOR=nvim
-export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
+# export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
 export ARTISAN_OPEN_ON_MAKE_EDITOR=nvr
 export FZF_DEFAULT_COMMAND='ag -u -g ""'
 export FZF_DEFAULT_OPTS='

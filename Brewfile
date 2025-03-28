@@ -12,6 +12,7 @@ brew "starship"
 brew "lazygit"
 brew "gh"
 brew "gpg"
+brew "bat"
 
 cask "1password-cli"
 cask "nikitabobko/tap/aerospace"

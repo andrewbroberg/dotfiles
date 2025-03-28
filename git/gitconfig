@@ -67,8 +67,6 @@
     editor = nvim
     excludesfile = ~/.gitignore
     pager = delta
-[diff]
-    tool = vimdiff
 [fetch]
     prune = true
 [help]
