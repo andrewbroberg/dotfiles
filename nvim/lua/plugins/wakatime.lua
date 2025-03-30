@@ -1,1 +1,5 @@
-return { 'wakatime/vim-wakatime', enabled = false, lazy = false }
+return {
+    'wakatime/vim-wakatime',
+    enabled = true,
+    lazy = false
+}
