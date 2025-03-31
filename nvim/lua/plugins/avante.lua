@@ -32,7 +32,7 @@ return {
             }
         },
         rag_service = {
-            enabled = true,      -- Enables the RAG service
+            enabled = false,     -- Enables the RAG service
             provider = "ollama", -- The provider to use for RAG service (e.g. openai or ollama)
             endpoint = "http://localhost:11434",
             host_mount = vim.fn.expand("~/code")
