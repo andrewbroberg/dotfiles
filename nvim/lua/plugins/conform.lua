@@ -5,7 +5,7 @@ return {
     opts = {
         format_on_save = {
             timeout_ms = 1000,
-            lsp_format = "false",
+            lsp_format = "never",
         },
         formatters_by_ft = {
             lua = { "stylua" },

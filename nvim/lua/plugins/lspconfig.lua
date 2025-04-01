@@ -87,7 +87,8 @@ return {
                 plugins = {
                     {
                         name = "@vue/typescript-plugin",
-                        location = vim.fn.expand("~/.nvm/versions/node/v23.9.0/lib/node_modules/@vue/typescript-plugin"),
+                        location = vim.fn.expand(
+                        "/Users/andrew/Library/Application Support/Herd/config/nvm/versions/node/v22.14.0/lib/node_modules/@vue/typescript-plugin"),
                         languages = { "javascript", "typescript", "vue" },
                     },
                 },
