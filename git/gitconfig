@@ -65,7 +65,7 @@
     gpgsign = true 
 [core]
     editor = nvim
-    excludesfile = ~/.gitignore
+	excludesfile = /Users/andrew/.gitignore_global
 [fetch]
     prune = true
 [help]
@@ -84,3 +84,8 @@
 	format = ssh
 [gpg "ssh"]
 	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
