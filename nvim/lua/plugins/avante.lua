@@ -9,9 +9,9 @@ return {
         auto_suggestions_provider = "claude",
         cursor_planning_provider = "claude",
         behaviour = {
-            enable_cursor_planning_mode = false,
-            auto_apply_diff_after_generation = true,
-            enable_claude_text_editor_tool_mode = true,
+            enable_cursor_planning_mode = true,
+            auto_apply_diff_after_generation = false,
+            enable_claude_text_editor_tool_mode = false,
             use_cwd_as_project_root = true,
         },
         claude = {

@@ -24,7 +24,7 @@ return {
         quickfile = { enabled = true },
         statuscolumn = { enabled = true },
         indent = { enabled = true },
-        input = { enabled = true },
+        input = { enabled = false },
         words = { enabled = true },
         terminal = { enabled = true },
         rename = { enabled = true },

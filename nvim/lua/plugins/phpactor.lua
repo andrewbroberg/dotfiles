@@ -1,18 +1,18 @@
--- PHP Refactoring Tools
-
 return {
-  "gbprod/phpactor.nvim",
-  dependencies = {
-    "nvim-lua/plenary.nvim",
-    "neovim/nvim-lspconfig"
-  },
-  opts = {
-    install = {
-      -- despite being under "install" this path is used when running RPC commands.
-      bin = vim.fn.stdpath("data") .. "/mason/packages/phpactor/phpactor",
-    },
-    lspconfig = {
-      enabled = false,
+    'phpactor/phpactor',
+
+    build = 'composer install --no-dev --optimize-autoloader',
+
+    ft = 'php',
+
+    keys = {
+        { '<Leader>p', ':PhpactorContextMenu<CR>' },
+        { '<Leader>u', ':call phpactor#ImportClass()<CR>' },
+        { '<leader>rc', ':call phpactor#ExtractConstant()<cr>', mode = 'v' },                    -- Extract a constant
+        { '<leader>re', ':<c-u>call phpactor#ExtractExpression(visualmode())<cr>', mode = 'v' }, -- Extract an expression (variable)
+        { '<leader>rm', ':<c-u>call phpactor#ExtractMethod(visualmode())<cr>', mode = 'v' },     -- Extract a method
+        { '<Leader>nc', ':PhpactorClassNew<CR>' },
+        { '<Leader>mf', ':PhpactorMoveFile<CR>' },
+        { '<Leader>fu', ':PhpactorFindReferences<CR>' },
     }
-  },
 }
