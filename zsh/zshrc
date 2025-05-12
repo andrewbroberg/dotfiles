@@ -171,3 +171,6 @@ export HERD_PHP_83_INI_SCAN_DIR="/Users/andrew/Library/Application Support/Herd/
 
 # Herd injected PHP 8.2 configuration.
 export HERD_PHP_82_INI_SCAN_DIR="/Users/andrew/Library/Application Support/Herd/config/php/82/"
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /opt/homebrew/bin/terraform terraform
