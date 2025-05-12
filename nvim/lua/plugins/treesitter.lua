@@ -1,5 +1,3 @@
-local T
-
 return {
   'nvim-treesitter/nvim-treesitter',
 
