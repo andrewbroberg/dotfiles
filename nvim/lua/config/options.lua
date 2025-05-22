@@ -5,6 +5,7 @@ vim.opt.softtabstop = 4
 vim.opt.expandtab = true
 vim.opt.smartindent = true
 vim.opt.number = true
+vim.opt.cursorline = true
 vim.opt.relativenumber = true
 vim.opt.title = true
 vim.opt.termguicolors = true
@@ -39,3 +40,5 @@ vim.opt.exrc = true
 vim.opt.secure = true
 vim.opt.titlestring = "%f // nvim"
 vim.opt.inccommand = "split"
+
+vim.cmd("highlight CursorLineNr gui=bold cterm=bold")
