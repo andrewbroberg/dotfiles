@@ -90,27 +90,27 @@ return {
             capabilities = capabilities,
         })
 
-        -- require('lspconfig').ts_ls.setup({
-        --     init_options = {
-        --         plugins = {
-        --             {
-        --                 name = "@vue/typescript-plugin",
-        --                 location = vim.fn.expand(
-        --                 "/Users/andrew/Library/Application Support/Herd/config/nvm/versions/node/v22.14.0/lib/node_modules/@vue/typescript-plugin"),
-        --                 languages = { "javascript", "typescript", "vue" },
-        --             },
-        --         },
-        --     },
-        --     filetypes = {
-        --         "javascript",
-        --         "javascriptreact",
-        --         "javascript.jsx",
-        --         "typescript",
-        --         "typescriptreact",
-        --         "typescript.tsx",
-        --         "vue",
-        --     },
-        -- })
+        require('lspconfig').ts_ls.setup({
+            init_options = {
+                plugins = {
+                    {
+                        name = "@vue/typescript-plugin",
+                        location = vim.fn.expand(vim.fn.stdpath("data") .. "/mason/packages/vue-language-server/node_modules/@vue/language-server"),
+                        configNamespace = "typescript",
+                        languages = { "vue" },
+                    },
+                },
+            },
+            filetypes = {
+                "javascript",
+                "javascriptreact",
+                "javascript.jsx",
+                "typescript",
+                "typescriptreact",
+                "typescript.tsx",
+                "vue",
+            },
+        })
 
         -- Antlers
         require('lspconfig').antlersls.setup({ capabilities = capabilities })
