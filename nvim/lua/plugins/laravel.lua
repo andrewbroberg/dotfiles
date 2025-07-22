@@ -10,6 +10,7 @@ return {
         { "<leader>lr", ":LaravelRoute<cr>", desc = "Laravel Routes" },
         { "<leader>lm", ":LaravelMake<cr>", desc = "Laravel Make" },
     },
+    enabled = false,
     config = function()
         require("laravel").setup()
     end,

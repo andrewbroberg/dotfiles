@@ -1,0 +1,90 @@
+{
+  "method": {
+    "prefix": "met",
+    "body": ["${1:public} function ${2:name}($3)$4", "{", "    ${0://}", "}"],
+    "description": "Define method"
+  },
+  "static method": {
+    "prefix": "smet",
+    "body": [
+      "${1:public} static function ${2:name}($3)$4",
+      "{",
+      "    ${0://}",
+      "}"
+    ],
+    "description": "Define static method"
+  },
+  "laravel route": {
+    "prefix": "route",
+    "body": ["Route::${1:get}('${2:route}', [${3:controller}, ${4:method}]);"],
+    "description": "Create a Laravel route"
+  },
+  "$this->": {
+    "prefix": "$",
+    "body": ["$this->$0"],
+    "description": "Typing $this-> is tedious"
+  },
+  "test method": {
+    "prefix": "test",
+    "body": [
+      "/** @test */",
+      "public function it_$1($2)",
+      "{",
+      "    ${3:$this->markTestIncomplete();}",
+      "}"
+    ],
+    "description": "PHPUnit test method"
+  },
+  "test with provider": {
+    "prefix": "testp",
+    "body": ["/**", " * @test", " * @dataProvider $1${2:Provider}", " */"],
+    "description": "Add a test data provider method"
+  },
+  "pest test method": {
+    "prefix": "pest",
+    "body": ["it('$1', function () {", "    //$0", "})${3:->skip()};"],
+    "description": "Pest test method"
+  },
+  "class property": {
+    "prefix": "prop",
+    "body": ["${1:public} $${2:property} = $0;"],
+    "description": "Declare class property"
+  },
+  "dto constructor": {
+    "prefix": "dtoc",
+    "body": [
+      "public function __construct(array $parameters = [])",
+      "{",
+      "    parent::__construct(array_merge($parameters, [",
+      "        ${1}",
+      "    ]));",
+      "}",
+    ],
+    "description": "Override the spatie/data-transfer-object constuctor"
+  },
+  "strict php": {
+    "prefix": "strict",
+    "body": [
+      "<?php",
+      "",
+      "declare(strict_types=1);",
+      "",
+      "${0}"
+    ],
+    "description": "Start a strict file"
+  },
+  "strict declaration": {
+    "prefix": "dst",
+    "body": ["declare(strict_types=1);"],
+    "description": "Add strict type declaration"
+  },
+  "test todo": {
+    "prefix": "todot",
+    "body": [
+      "it('${1}', function () {",
+      "    // ${0}",
+      "})->todo();",
+    ],
+    "description": "Create a todo test"
+  }
+}

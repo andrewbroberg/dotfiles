@@ -1,0 +1,7 @@
+{
+  "class property": {
+    "prefix": "prop",
+    "body": ["${1:public} $${2:property} = $0;"],
+    "description": "Declare class property"
+  }
+}

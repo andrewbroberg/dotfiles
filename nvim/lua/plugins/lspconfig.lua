@@ -4,10 +4,9 @@ return {
     'neovim/nvim-lspconfig',
     event = 'VeryLazy',
     dependencies = {
-        'williamboman/mason.nvim',
-        'williamboman/mason-lspconfig.nvim',
+        'mason-org/mason.nvim',
+        'mason-org/mason-lspconfig.nvim',
         'b0o/schemastore.nvim',
-        'saghen/blink.cmp',
     },
     config = function()
         -- Setup Mason to automatically install LSP servers
@@ -19,7 +18,15 @@ return {
 
         local capabilities = require('blink.cmp').get_lsp_capabilities()
 
-        require('mason-lspconfig').setup({ automatic_installation = true })
+        require('mason-lspconfig').setup({
+            automatic_installation = true,
+            automatic_enable = {
+                exclude = {
+                    "phpactor",
+                    "intelephense"
+                }
+            }
+        })
 
         require('lspconfig').bashls.setup({
             capabilities = capabilities
@@ -30,8 +37,7 @@ return {
             capabilities = capabilities
         })
 
-        -- PHP
-        require('lspconfig').intelephense.setup({
+       require('lspconfig').intelephense.setup({
             commands = {
                 IntelephenseIndex = {
                     function()
@@ -39,88 +45,64 @@ return {
                     end,
                 },
             },
-            capabilities = capabilities
-        })
-
-        require('lspconfig').phpactor.setup({
-            capabilities = capabilities,
 
             settings = {
-                phpactor = {
+                intelephense = {
+                    telemetry = {
+                        enabled = false
+                    },
                     files = {
                         maxSize = 5000000
                     }
+                },
+                environment = {
+                    phpVersion = '8.4.10'
                 }
             },
-
-            on_attach = function(client, bufnr)
-                client.server_capabilities.completionProvider = false
-                client.server_capabilities.hoverProvider = false
-                client.server_capabilities.implementationProvider = false
-                client.server_capabilities.referencesProvider = false
-                client.server_capabilities.renameProvider = false
-                client.server_capabilities.selectionRangeProvider = false
-                client.server_capabilities.signatureHelpProvider = false
-                client.server_capabilities.typeDefinitionProvider = false
-                client.server_capabilities.workspaceSymbolProvider = false
-                client.server_capabilities.definitionProvider = false
-                client.server_capabilities.documentHighlightProvider = false
-                client.server_capabilities.documentSymbolProvider = false
-                client.server_capabilities.documentFormattingProvider = false
-                client.server_capabilities.documentRangeFormattingProvider = false
-            end,
-
-            init_options = {
-                ["language_server_worse_reflection.inlay_hints.enable"] = true,
-                ["language_server_worse_reflection.inlay_hints.params"] = true,
-                ["language_server_worse_reflection.inlay_hints.types"] = false,
-            },
-
-            handlers = {
-                ['textDocument/publishDiagnostics'] = function() end
-            }
         })
 
-        -- Vue, JavaScript, TypeScript
-        require('lspconfig').volar.setup({
-            on_attach = function(client, bufnr)
-                client.server_capabilities.documentFormattingProvider = false
-                client.server_capabilities.documentRangeFormattingProvider = false
-            end,
-            capabilities = capabilities,
-        })
-
-        require('lspconfig').ts_ls.setup({
-            init_options = {
-                plugins = {
-                    {
-                        name = "@vue/typescript-plugin",
-                        location = vim.fn.expand(vim.fn.stdpath("data") .. "/mason/packages/vue-language-server/node_modules/@vue/language-server"),
-                        configNamespace = "typescript",
-                        languages = { "vue" },
+        vim.lsp.config("vtsls", {
+            filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
+            settings = {
+                vtsls = { tsserver = { globalPlugins = {} } },
+                typescript = {
+                    inlayHints = {
+                        parameterNames = { enabled = "literals" },
+                        parameterTypes = { enabled = true },
+                        variableTypes = { enabled = true },
+                        propertyDeclarationTypes = { enabled = true },
+                        functionLikeReturnTypes = { enabled = true },
+                        enumMemberValues = { enabled = true },
                     },
                 },
             },
-            filetypes = {
-                "javascript",
-                "javascriptreact",
-                "javascript.jsx",
-                "typescript",
-                "typescriptreact",
-                "typescript.tsx",
-                "vue",
-            },
+            before_init = function(_, config)
+                table.insert(config.settings.vtsls.tsserver.globalPlugins, {
+                    name = "@vue/typescript-plugin",
+                    location = vim.fn.expand(
+                        "$MASON/packages/vue-language-server/node_modules/@vue/language-server"
+                    ),
+                    languages = { "vue" },
+                    configNamespace = "typescript",
+                    enableForWorkspaceTypeScriptVersions = true,
+                })
+            end,
+            on_attach = function(client)
+                client.server_capabilities.documentFormattingProvider = false
+                client.server_capabilities.documentRangeFormattingProvider = false
+            end,
         })
 
-        -- Antlers
+               -- Antlers
         require('lspconfig').antlersls.setup({ capabilities = capabilities })
 
         -- Tailwind CSS
         require('lspconfig').tailwindcss.setup({ capabilities = capabilities })
 
-        -- JSON
+       -- JSON
         require('lspconfig').jsonls.setup({
             capabilities = capabilities,
+
             settings = {
                 json = {
                     schemas = require('schemastore').json.schemas(),
@@ -128,20 +110,27 @@ return {
             },
         })
 
-        -- Lua
-        require('lspconfig').lua_ls.setup({
+        vim.lsp.config("lua_ls", {
+            on_attach = function(client)
+                client.server_capabilities.documentFormattingProvider = false
+                client.server_capabilities.documentRangeFormattingProvider = false
+            end,
             settings = {
                 Lua = {
-                    runtime = { version = 'LuaJIT' },
                     workspace = {
                         checkThirdParty = false,
-                        library = {
-                            '${3rd}/luv/library',
-                            unpack(vim.api.nvim_get_runtime_file('', true)),
-                        },
-                    }
-                }
-            }
+                    },
+                    completion = {
+                        callSnippet = "Replace",
+                    },
+                    telemetry = {
+                        enable = false,
+                    },
+                    diagnostics = {
+                        globals = { "vim" },
+                    },
+                },
+            },
         })
 
         -- Keymaps
@@ -152,7 +141,8 @@ return {
 
         -- Diagnostic configuration
         vim.diagnostic.config({
-            virtual_text = true,
+            virtual_text = false,
+
             float = {
                 source = true,
             }
