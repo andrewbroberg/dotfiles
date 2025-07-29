@@ -4,16 +4,13 @@ return {
   dependencies = {
     'nvim-treesitter/nvim-treesitter-context',
     'nvim-treesitter/nvim-treesitter-textobjects',
+    'JoosepAlviste/nvim-ts-context-commentstring',
   },
 
   build = ':TSUpdate',
   lazy = false,
 
   opts = {
-    context_commentstring = {
-      enable = true,
-    },
-
     ensure_installed = 'all',
     ignore_install = { 'norg' },
 
