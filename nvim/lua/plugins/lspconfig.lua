@@ -19,25 +19,26 @@ return {
         local capabilities = require('blink.cmp').get_lsp_capabilities()
 
         require('mason-lspconfig').setup({
-            automatic_installation = true,
-            automatic_enable = {
-                exclude = {
-                    "phpactor",
-                    "intelephense"
-                }
-            }
+            automatic_installation = true
         })
 
-        require('lspconfig').bashls.setup({
+        vim.lsp.config("bashls", {
+            cmd = { "bash-language-server", "start" },
+            filetypes = { "sh", "bash" },
             capabilities = capabilities
         })
 
         -- YAML
-        require('lspconfig').yamlls.setup({
+        vim.lsp.config("yamlls", {
+            cmd = { "yaml-language-server", "--stdio" },
+            filetypes = { "yaml", "yaml.docker-compose" },
             capabilities = capabilities
         })
 
-       require('lspconfig').intelephense.setup({
+        vim.lsp.config("intelephense", {
+            cmd = { "intelephense", "--stdio" },
+            filetypes = { "php" },
+            capabilities = capabilities,
             commands = {
                 IntelephenseIndex = {
                     function()
@@ -45,7 +46,6 @@ return {
                     end,
                 },
             },
-
             settings = {
                 intelephense = {
                     telemetry = {
@@ -93,16 +93,25 @@ return {
             end,
         })
 
-               -- Antlers
-        require('lspconfig').antlersls.setup({ capabilities = capabilities })
+        -- Antlers
+        vim.lsp.config("antlersls", {
+            cmd = { "antlersls", "--stdio" },
+            filetypes = { "antlers", "html" },
+            capabilities = capabilities
+        })
 
         -- Tailwind CSS
-        require('lspconfig').tailwindcss.setup({ capabilities = capabilities })
+        vim.lsp.config("tailwindcss", {
+            cmd = { "tailwindcss-language-server", "--stdio" },
+            filetypes = { "html", "css", "scss", "javascript", "javascriptreact", "typescript", "typescriptreact", "vue", "svelte", "php", "blade" },
+            capabilities = capabilities
+        })
 
-       -- JSON
-        require('lspconfig').jsonls.setup({
+        -- JSON
+        vim.lsp.config("jsonls", {
+            cmd = { "vscode-json-language-server", "--stdio" },
+            filetypes = { "json", "jsonc" },
             capabilities = capabilities,
-
             settings = {
                 json = {
                     schemas = require('schemastore').json.schemas(),
