@@ -148,7 +148,7 @@ zstyle :bracketed-paste-magic paste-finish pastefinish
 autoload -U add-zsh-hook
 
 # Herd injected PHP binary.
-export PATH="$HOME/Library/Application Support/Herd/bin/":$PATH
+export PATH="$HOME/Library/Application Support/Herd/bin/":$HOME/.spin/bin:$PATH
 
 if [[ -f "$HOME/.zshrc_local" ]]; then
   source "$HOME/.zshrc_local"
@@ -174,3 +174,7 @@ export HERD_PHP_82_INI_SCAN_DIR="/Users/andrew/Library/Application Support/Herd/
 
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /opt/homebrew/bin/terraform terraform
+
+
+# Herd injected PHP 8.5 configuration.
+export HERD_PHP_85_INI_SCAN_DIR="/Users/andrew/Library/Application Support/Herd/config/php/85/"
