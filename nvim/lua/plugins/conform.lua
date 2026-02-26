@@ -10,11 +10,11 @@ return {
         formatters_by_ft = {
             lua = { "stylua" },
             php = { "pint" },
-            typescript = { "prettier" },
-            vue = { "prettier" },
-            javascript = { "prettier" },
-            typescriptreact = { "prettier" },
-            typescriptvue = { "prettier" },
+            typescript = { "eslint_d" },
+            vue = { "eslint_d" },
+            javascript = { "eslint_d" },
+            typescriptreact = { "eslint_d" },
+            typescriptvue = { "eslint_d" },
         },
     },
 }
