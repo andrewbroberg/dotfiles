@@ -35,31 +35,15 @@ return {
             capabilities = capabilities
         })
 
-        vim.lsp.config("intelephense", {
-            cmd = { "intelephense", "--stdio" },
+        vim.lsp.config("phpantom", {
+            cmd = { vim.fn.expand("~/.local/bin/phpantom_lsp") },
             filetypes = { "php" },
+            root_markers = { "composer.json", ".git" },
             capabilities = capabilities,
-            commands = {
-                IntelephenseIndex = {
-                    function()
-                        vim.lsp.buf.execute_command({ command = 'intelephense.index.workspace' })
-                    end,
-                },
-            },
-            settings = {
-                intelephense = {
-                    telemetry = {
-                        enabled = false
-                    },
-                    files = {
-                        maxSize = 5000000
-                    }
-                },
-                environment = {
-                    phpVersion = '8.4.10'
-                }
-            },
         })
+        vim.lsp.enable("phpantom")
+
+        vim.lsp.enable("intelephense", false)
 
         vim.lsp.config("vtsls", {
             filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
