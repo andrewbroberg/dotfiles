@@ -1,3 +1,7 @@
+language_server.worse_reflection.diagnostics.enable: false
+language_server.diagnostics.enable: false
+language_server.enable: false
+
 indexer:
   exclude_patterns:
     - "\/vendor\/**\/Tests\/**\/*"

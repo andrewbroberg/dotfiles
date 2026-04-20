@@ -19,6 +19,7 @@ return {
         local capabilities = require('blink.cmp').get_lsp_capabilities()
 
         require('mason-lspconfig').setup({
+            ensure_installed = { "taplo" },
             automatic_installation = true
         })
 
@@ -34,6 +35,14 @@ return {
             filetypes = { "yaml", "yaml.docker-compose" },
             capabilities = capabilities
         })
+
+        -- TOML
+        vim.lsp.config("taplo", {
+            cmd = { "taplo", "lsp", "stdio" },
+            filetypes = { "toml" },
+            capabilities = capabilities
+        })
+        vim.lsp.enable("taplo")
 
         vim.lsp.config("intelephense", {
             cmd = { "intelephense", "--stdio" },
@@ -54,12 +63,20 @@ return {
                     files = {
                         maxSize = 5000000
                     }
-                },
-                environment = {
-                    phpVersion = '8.4.10'
                 }
             },
         })
+
+        vim.lsp.enable("intelephense", false)
+
+        vim.lsp.config['phpantom'] = {
+            cmd = { '/Users/andrew/code/phpantom_lsp/target/release/phpantom_lsp' },
+            filetypes = { 'php' },
+            root_markers = { 'composer.json', '.git' },
+            capabilities = capabilities
+        }
+
+        vim.lsp.enable('phpantom')
 
         vim.lsp.config("vtsls", {
             filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },

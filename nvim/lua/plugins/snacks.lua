@@ -30,6 +30,7 @@ return {
         rename = { enabled = true },
         explorer = { enabled = true, replace_netrw = true },
         picker = { enabled = true },
+        image = { enabled = true },
     },
     keys = {
         -- Top Pickers & Explorer

@@ -5,9 +5,7 @@
     "statamic/cli": "^3.6"
   },
   "require-dev": {
-    "friendsofphp/php-cs-fixer": "^3.65",
-    "laravel/pint": "^1.16",
-    "squizlabs/php_codesniffer": "*"
+    "laravel/pint": "^1.16"
   },
   "minimum-statbility": "dev",
   "prefer-stable": true,

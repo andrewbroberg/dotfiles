@@ -10,6 +10,7 @@ return {
         formatters_by_ft = {
             lua = { "stylua" },
             php = { "pint" },
+            toml = { "taplo" },
             typescript = { "eslint_d" },
             vue = { "eslint_d" },
             javascript = { "eslint_d" },

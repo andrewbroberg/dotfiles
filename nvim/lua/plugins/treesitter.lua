@@ -1,64 +1,74 @@
+local t
+
 return {
-  'nvim-treesitter/nvim-treesitter',
+    'nvim-treesitter/nvim-treesitter',
 
-  dependencies = {
-    'nvim-treesitter/nvim-treesitter-context',
-    'nvim-treesitter/nvim-treesitter-textobjects',
-    'JoosepAlviste/nvim-ts-context-commentstring',
-  },
+    build = ':TSUpdate',
+    branch = 'main',
+    lazy = false,
 
-  build = ':TSUpdate',
-  lazy = false,
-
-  opts = {
-    ensure_installed = 'all',
-    ignore_install = { 'norg' },
-
-    highlight = {
-      enable = true,
+    dependencies = {
+        { 'nvim-treesitter/nvim-treesitter-textobjects', branch = 'main' },
+        'nvim-treesitter/nvim-treesitter-context',
+        { 'JoosepAlviste/nvim-ts-context-commentstring', branch = 'main' },
     },
 
-    indent = {
-      enable = true,
-    },
+    opts = {
+        ensure_installed = 'all',
+        ignore_install = {'phpdoc'},
 
-    textobjects = {
-      select = {
-        enable = true,
-        lookahead = true,
-        keymaps = {
-          ["iC"] = "@class.inner",
-          ["aC"] = "@class.outer",
-          ["if"] = "@function.inner",
-          ["af"] = "@function.outer",
-          ['ic'] = '@conditional.inner',
-          ['ac'] = '@conditional.outer',
-          ['il'] = '@loop.inner',
-          ['al'] = '@loop.outer',
-          ['ia'] = '@parameter.inner', -- a for argument because p is paragraph
-          ['aa'] = '@parameter.outer',
-          ['ih'] = '@attribute.inner', -- `h` for html, because `a` is argument above
-          ['ah'] = '@attribute.outer',
+        highlight = {
+            enable = true,
         },
 
-        selection_modes = {
-          ['@class.inner'] = 'V',
-          ['@class.outer'] = 'V',
-          ['@function.inner'] = 'V',
-          ['@function.outer'] = 'V',
-          ['@conditional.inner'] = 'V',
-          ['@conditional.outer'] = 'V',
-          ['@loop.inner'] = 'V',
-          ['@loop.outer'] = 'V',
-          ['@statement.outer'] = 'V',
+        indent = {
+            enable = true,
         },
-      },
+
+        textobjects = {
+            select = {
+                enable = true,
+                lookahead = true,
+                keymaps = {
+                    ["iC"] = "@class.inner",
+                    ["aC"] = "@class.outer",
+                    ["if"] = "@function.inner",
+                    ["af"] = "@function.outer",
+                    ['ic'] = '@conditional.inner',
+                    ['ac'] = '@conditional.outer',
+                    ['il'] = '@loop.inner',
+                    ['al'] = '@loop.outer',
+                    ['ia'] = '@parameter.inner', -- a for argument because p is paragraph
+                    ['aa'] = '@parameter.outer',
+                    ['ih'] = '@attribute.inner', -- `h` for html, because `a` is argument above
+                    ['ah'] = '@attribute.outer',
+                },
+
+                selection_modes = {
+                    ['@class.inner'] = 'V',
+                    ['@class.outer'] = 'V',
+                    ['@function.inner'] = 'V',
+                    ['@function.outer'] = 'V',
+                    ['@conditional.inner'] = 'V',
+                    ['@conditional.outer'] = 'V',
+                    ['@loop.inner'] = 'V',
+                    ['@loop.outer'] = 'V',
+                    ['@statement.outer'] = 'V',
+                },
+            },
+        },
+
+        context = {
+            enable = false,
+            mode = 'topline',
+            multiwindow = true,
+            multiline_threshold = 1,
+            separator = '0',
+        },
     },
-  },
 
-  config = function(_, opts)
-    require('nvim-treesitter.configs').setup(opts)
-
-    t = require('nvim-treesitter.ts_utils')
-  end
+    config = function (_, opts)
+        require('nvim-treesitter.config').setup(opts)
+        require('treesitter-context').setup(opts.context)
+    end
 }

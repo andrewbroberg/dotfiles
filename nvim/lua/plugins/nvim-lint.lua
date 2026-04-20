@@ -8,8 +8,7 @@ return {
       vue = { 'eslint' },
       javascriptreact = { 'eslint' },
       typescript = { 'eslint' },
-      typescriptreact = { 'eslint' },
-      php = { 'phpstan' },
+      typescriptreact = { 'eslint' }
     }
 
     -- Configure eslint_d to use flat config (eslint.config.js)
