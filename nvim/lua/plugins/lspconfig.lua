@@ -161,7 +161,12 @@ return {
 
         -- Keymaps
         vim.keymap.set('n', '<Leader>d', '<cmd>lua vim.diagnostic.open_float()<CR>')
-        vim.keymap.set('n', '<Leader>lr', ':LspRestart<CR>', { silent = true })
+        vim.keymap.set('n', '<Leader>lr', function()
+            for _, client in ipairs(vim.lsp.get_clients({ bufnr = 0 })) do
+                client:stop()
+            end
+            vim.cmd.edit()
+        end, { silent = true, desc = 'Restart LSP' })
         vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>')
         vim.keymap.set('n', '<Leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>')
 

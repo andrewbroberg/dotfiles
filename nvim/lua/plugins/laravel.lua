@@ -1,17 +1,20 @@
 return {
-    "adibhanna/laravel.nvim",
+    'adibhanna/laravel.nvim',
+
     dependencies = {
-        "MunifTanjim/nui.nvim",
-        "nvim-lua/plenary.nvim",
+        'MunifTanjim/nui.nvim',
+        'nvim-lua/plenary.nvim',
     },
+
+
     keys = {
-        { "<leader>la", ":Artisan<cr>", desc = "Laravel Artisan" },
-        { "<leader>lc", ":Composer<cr>", desc = "Composer" },
-        { "<leader>lr", ":LaravelRoute<cr>", desc = "Laravel Routes" },
-        { "<leader>lm", ":LaravelMake<cr>", desc = "Laravel Make" },
+        { '<leader>la', ':Artisan<cr>', desc = 'Laravel Artisan' },
+        { '<leader>lc', ':Composer<cr>', desc = 'Composer' },
+        -- { '<leader>lr', ':LaravelRoute<cr>', desc = 'Laravel Routes' },
+        { '<leader>lm', ':LaravelMake<cr>', desc = 'Laravel Make' },
     },
-    enabled = false,
+    event = { 'VeryLazy' },
     config = function()
-        require("laravel").setup()
+        require('laravel').setup()
     end,
 }
