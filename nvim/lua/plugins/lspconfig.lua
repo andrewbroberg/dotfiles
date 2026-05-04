@@ -67,7 +67,7 @@ return {
             },
         })
 
-        vim.lsp.enable("intelephense", false)
+        vim.lsp.enable("intelephense", tru)
 
         vim.lsp.config['phpantom'] = {
             cmd = { '/Users/andrew/code/phpantom_lsp/target/release/phpantom_lsp' },
@@ -76,7 +76,7 @@ return {
             capabilities = capabilities
         }
 
-        vim.lsp.enable('phpantom')
+        vim.lsp.enable('phpantom', false)
 
         vim.lsp.config("vtsls", {
             filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
