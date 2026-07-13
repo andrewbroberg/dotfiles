@@ -56,7 +56,7 @@ Optional arguments: `--base {branch}` (default: master), `--draft` (create as dr
 
 ```bash
 git push -u origin $(git branch --show-current)
-gh pr create --title "{title}" --body "$(cat <<'EOF'
+gh pr create --assignee @me --title "{title}" --body "$(cat <<'EOF'
 {body}
 EOF
 )"

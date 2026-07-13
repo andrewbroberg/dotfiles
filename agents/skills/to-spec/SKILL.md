@@ -1,92 +1,75 @@
 ---
 name: to-spec
-description: Write the current conversation's planning context into a spec.md file with plan directory scaffolding and optional Solo sync. Invoke with /to-spec.
+description: Turn the current conversation into a spec and publish it to the project issue tracker — no interview, just synthesis of what you've already discussed.
+disable-model-invocation: true
 ---
 
-This skill takes the planning context from the current conversation and writes it out as a structured spec. Do NOT interview the user — synthesize what has already been discussed.
+This skill takes the current conversation context and codebase understanding and produces a spec (you may know this document as a PRD). Do NOT interview the user — just synthesize what you already know.
 
-The user may provide a path or slug. If not, derive the slug from the conversation topic (e.g. `api-deals-role-tree`).
+The issue tracker and triage label vocabulary should have been provided to you — run `/setup-matt-pocock-skills` if not.
 
 ## Process
 
-1. **Determine the plan slug.** If the user provided a path like `.ai/plans/{slug}/spec.md`, extract the slug. If they provided just a slug, use it. If neither, derive a short kebab-case slug from the conversation topic. Confirm the slug with the user only if it was derived — not if it was explicitly provided.
+1. Explore the repo to understand the current state of the codebase, if you haven't already. Use the project's domain glossary vocabulary throughout the spec, and respect any ADRs in the area you're touching.
 
-2. **Scaffold the plan directory.** Run:
-   ```
-   mkdir -p .ai/plans/{slug}/tasks
-   touch .ai/plans/{slug}/learnings.md
-   ```
+2. Sketch out the seams at which you're going to test the feature. Existing seams should be preferred to new ones. Use the highest seam possible. If new seams are needed, propose them at the highest point you can. The fewer seams across the codebase, the better - the ideal number is one.
 
-3. **Write the spec.** Use the Write tool to create `.ai/plans/{slug}/spec.md`. The spec body is synthesized from the conversation. Use the template below as a guide, but adapt sections to fit the work discussed. Not every section applies to every spec.
-**Always write the full spec content** to the scratchpad, not a summary or link to the file. The scratchpad should be a complete, self-contained copy of the spec.
+Check with the user that these seams match their expectations.
 
-4. **Solo sync (conditional).** If Solo MCP tools are available (i.e. tools prefixed `mcp__solo__` exist), read the `to-spec` section of `~/.claude/skills/_shared/solo-integration.md` and follow those steps. If Solo MCP tools are not available, skip silently — do not mention Solo or suggest configuring it.
+3. Write the spec using the template below, then publish it to the project issue tracker. Apply the `ready-for-agent` triage label - no need for additional triage.
 
-5. **Report.** Output the path to the written spec and confirm the directory structure was created. If Solo sync happened, mention the scratchpad was updated.
+<spec-template>
 
-## Spec template
+## Problem Statement
 
-Use this as a structural guide. Omit sections that don't apply. Add sections that the conversation warrants. The goal is a spec that the `/task-planner` skill can decompose into vertical-slice tasks.
+The problem that the user is facing, from the user's perspective.
 
-```markdown
-# {Title}
+## Solution
 
-## Overview
+The solution to the problem, from the user's perspective.
 
-2-3 sentences on what this work achieves and why.
+## User Stories
 
-## Payload Shape / API Contract / Interface
+A LONG, numbered list of user stories. Each user story should be in the format of:
 
-Concrete examples: JSON payloads, function signatures, CLI usage, schema definitions. Whatever makes the contract unambiguous.
+1. As an <actor>, I want a <feature>, so that <benefit>
 
-### Field definitions
+<user-story-example>
+1. As a mobile bank customer, I want to see balance on my accounts, so that I can make better informed decisions about my spending
+</user-story-example>
 
-Table of fields with type, required/optional, and description.
+This list of user stories should be extremely extensive and cover all aspects of the feature.
 
-## Domain Model / Enum / Config
+## Implementation Decisions
 
-New types, enums, config keys, or constants introduced by this work. Include the mapping to existing domain concepts where relevant.
+A list of implementation decisions that were made. This can include:
 
-## Validation Rules
+- The modules that will be built/modified
+- The interfaces of those modules that will be modified
+- Technical clarifications from the developer
+- Architectural decisions
+- Schema changes
+- API contracts
+- Specific interactions
 
-Validation logic, constraints, after-validation hooks. Reference existing validators if extending them.
+Do NOT include specific file paths or code snippets. They may end up being outdated very quickly.
 
-## Behaviour
+Exception: if a prototype produced a snippet that encodes a decision more precisely than prose can (state machine, reducer, schema, type shape), inline it within the relevant decision and note briefly that it came from a prototype. Trim to the decision-rich parts — not a working demo, just the important bits.
 
-Step-by-step description of what the implementation does at runtime. Name the action/service classes, their signatures, and the order of operations.
+## Testing Decisions
 
-### Design constraints
+A list of testing decisions that were made. Include:
 
-Invariants, things deliberately excluded, entry-point agnosticism, idempotency guarantees.
+- A description of what makes a good test (only test external behavior, not implementation details)
+- Which modules will be tested
+- Prior art for the tests (i.e. similar types of tests in the codebase)
 
-Always include:
-- **TDD is mandatory.** Red-green-refactor, strictly one test at a time. Never write all tests then implement.
+## Out of Scope
 
-## Testing
+A description of the things that are out of scope for this spec.
 
-| Decision | Choice | Rationale |
-|----------|--------|-----------|
-| Testing | Strict TDD red-green-refactor | One test at a time, green before next. Never write all tests then implement. |
+## Further Notes
 
-Specify test file locations and the kinds of tests expected (unit, feature, integration). If particular assertions or scenarios are known, list them — the task planner will promote each into its own acceptance criteria bullet, and the implementor will use each as a single red-green-refactor cycle.
+Any further notes about the feature.
 
-## Edge Cases
-
-Bullet list of edge cases and how each is handled.
-
-## Files to Create/Modify
-
-### New files
-- Path — one-line description
-
-### Modified files
-- Path — what changes
-```
-
-## Rules
-
-- Do NOT interview the user. Synthesize from the conversation context.
-- Do NOT explore the codebase to fill gaps. The spec captures what was planned, not what currently exists.
-- Do NOT invoke `/task-planner` or `/grill-me`. This skill writes the spec and stops.
-- If the conversation lacks enough context for a meaningful spec, say so and stop — do not fabricate.
-- Use Australian English throughout (authorised, organisation, behaviour, etc.).
+</spec-template>
