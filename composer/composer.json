@@ -2,6 +2,7 @@
   "require": {
     "ion-bazan/composer-diff": "^1.11",
     "laravel/installer": "^5.6",
+    "laravel/lsp": "^0.0.28",
     "statamic/cli": "^3.6"
   },
   "require-dev": {
