@@ -155,6 +155,7 @@ if [[ -f "$HOME/.zshrc_local" ]]; then
 fi
 
 eval "$(starship init zsh)"
+export TMUXIFIER_LAYOUT_PATH="$HOME/code/dotfiles/tmux/layouts"
 eval "$(tmuxifier init -)"
 
 # Herd injected NVM configuration
@@ -182,3 +183,11 @@ export HERD_PHP_85_INI_SCAN_DIR="/Users/andrew/Library/Application Support/Herd/
 # opencode
 export PATH=/Users/andrew/.opencode/bin:$PATH
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home
+
+# bun completions
+[ -s "/Users/andrew/.bun/_bun" ] && source "/Users/andrew/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
