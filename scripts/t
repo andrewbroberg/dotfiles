@@ -16,8 +16,8 @@ fi
 
 dirname=$(basename "$selected" | sed 's/\./_/g')
 
-# Attempt to load the tmuxifier session
-tmuxifier load-session "$dirname"
+# Attempt to load the shared tmuxifier session layout
+T_SESSION_NAME="$dirname" T_SESSION_ROOT="$selected" tmuxifier load-session default
 if [[ $? -eq 0 ]]; then
     exit 0
 fi
