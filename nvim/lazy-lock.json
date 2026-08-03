@@ -42,6 +42,7 @@
   "onenord.nvim": { "branch": "main", "commit": "5240bfb79bcab7e03508626c5283cfc417b79169" },
   "phpactor.nvim": { "branch": "main", "commit": "ff132c46bca95e0b955fc8cb1175511d27185e67" },
   "plenary.nvim": { "branch": "master", "commit": "74b06c6c75e4eeb3108ec01852001636d85a932b" },
+  "render-markdown.nvim": { "branch": "main", "commit": "f422cb5c6855f150e2ddcfaf44e7157b98b34f6a" },
   "schemastore.nvim": { "branch": "main", "commit": "9f98b46e1dd61aeb666989c344d76517df63af55" },
   "snacks.nvim": { "branch": "main", "commit": "882c996cf28183f4d63640de0b4c02ec886d01f2" },
   "telescope.nvim": { "branch": "master", "commit": "2eca9ba22002184ac05eddbe47a7fe2d5a384dfc" },
