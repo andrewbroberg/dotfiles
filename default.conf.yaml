@@ -16,7 +16,9 @@
 - link:
     ~/.config/nvim: nvim
     ~/.config/ghostty: ghostty
-    ~/Library/Application Support/lazygit/config.yml: lazygit/config.yml
+    ~/Library/Application Support/lazygit/config.yml:
+      path: lazygit/config.yml
+      create: true
     ~/.composer/composer.json: composer/composer.json
     ~/.gitignore_global: git/gitignore_global
     ~/scripts: scripts
