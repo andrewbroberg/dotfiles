@@ -1,3 +1,8 @@
+# Config version for compatibility and deprecations
+# See: https://nikitabobko.github.io/AeroSpace/guide#config-version
+# Fallback value (if you omit the key): config-version = 1
+config-version = 2
+
 # You can use it to add commands that run after login to macOS user session.
 # 'start-at-login' needs to be 'true' for 'after-login-command' to work
 # Available commands: https://nikitabobko.github.io/AeroSpace/commands
@@ -10,6 +15,10 @@ after-startup-command = ['exec-and-forget sketchybar']
 
 # Start AeroSpace at login
 start-at-login = true
+
+# Automatically reload the config when the config file is saved
+# After setting this to true, reload once manually to start the auto-reloading
+auto-reload-config = true
 
 # Normalizations. See: https://nikitabobko.github.io/AeroSpace/guide#normalization
 enable-normalization-flatten-containers = true
@@ -40,7 +49,88 @@ on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 # Also see: https://nikitabobko.github.io/AeroSpace/goodies#disable-hide-app
 automatically-unhide-macos-hidden-apps = false
 
-# Possible values: (qwerty|dvorak)
+# Focus the window under the mouse cursor as the mouse moves.
+# 'enabled' is the only sub-key.
+# Fallback value (if you omit the key): focus-follows-mouse.enabled = false
+focus-follows-mouse.enabled = true
+
+# List of workspaces that should stay alive even when they contain no windows,
+# even when they are invisible.
+# This config option is only available since 'config-version = 2'
+# Under 'config-version = 1' this list was inferred from the right hand side of
+# the keyboard bindings below; since v2 it must be declared explicitly.
+# Fallback value (if you omit the key): persistent-workspaces = []
+persistent-workspaces = ['1', 'B', 'C', 'T']
+
+# Window rules.
+# NOTE: this must appear before any [table] header, otherwise TOML would parse it
+# as a key of that table.
+# See: https://nikitabobko.github.io/AeroSpace/guide#on-window-detected-callback
+on-window-detected = [
+    # Floating
+    {
+        if = 'test %{app-bundle-id} = com.apple.finder',
+        run = 'layout floating',
+    },
+    {
+        if = 'test %{app-bundle-id} = com.1password.1password',
+        run = 'layout floating',
+    },
+    {
+        if = 'test %{app-bundle-id} = com.apple.Notes',
+        run = 'layout floating',
+    },
+
+    # Terminal
+    {
+        if = 'test %{app-bundle-id} = com.mitchellh.ghostty',
+        run = 'move-node-to-workspace T',
+    },
+    {
+        if = 'test %{app-bundle-id} = de.beyondco.herd',
+        run = 'move-node-to-workspace T',
+    },
+
+    # Browser
+    {
+        if = 'test %{app-bundle-id} = com.brave.Browser',
+        run = 'move-node-to-workspace B',
+    },
+    {
+        if = 'test %{app-bundle-id} = company.thebrowser.Browser',
+        run = 'move-node-to-workspace B',
+    },
+
+    # Comms
+    {
+        if = 'test %{app-bundle-id} = com.microsoft.Outlook',
+        run = 'move-node-to-workspace C',
+    },
+    {
+        if = 'test %{app-bundle-id} = com.tinyspeck.slackmacgap',
+        run = 'move-node-to-workspace C',
+    },
+
+    # Debug apps
+    {
+        if = 'test %{app-bundle-id} = org.RedisLabs.RedisInsight-V2',
+        run = 'move-node-to-workspace 1',
+    },
+    {
+        if = 'test %{app-bundle-id} = com.postmanlabs.mac',
+        run = 'move-node-to-workspace B',
+    },
+    {
+        if = 'test %{app-bundle-id} = de.beyondco.tinkerwell',
+        run = 'move-node-to-workspace 1',
+    },
+    {
+        if = 'test %{app-bundle-id} = com.tinyapp.TablePlus',
+        run = 'move-node-to-workspace 1',
+    },
+]
+
+# Possible values: (qwerty|dvorak|colemak)
 # See https://nikitabobko.github.io/AeroSpace/guide#key-mapping
 [key-mapping]
 preset = 'qwerty'
@@ -135,59 +225,6 @@ C = ['main']
 T = ['secondary', 'main']
 B = ['secondary', 'main']
 1 = ['secondary', 'main']
-
-# Floating
-[[on-window-detected]]
-if.app-id = 'com.apple.finder'
-run = 'layout floating'
-
-[[on-window-detected]]
-if.app-id = 'com.1password.1password'
-run = 'layout floating'
-
-[[on-window-detected]]
-if.app-id = 'com.apple.Notes'
-run = 'layout floating'
-
-# Terminal
-[[on-window-detected]]
-if.app-id = 'com.mitchellh.ghostty'
-run = 'move-node-to-workspace T'
-
-[[on-window-detected]]
-if.app-id = 'de.beyondco.herd'
-run = 'move-node-to-workspace T'
-
-# Browser
-[[on-window-detected]]
-if.app-id = 'com.brave.Browser'
-run = 'move-node-to-workspace B'
-
-# Comms
-[[on-window-detected]]
-if.app-id = 'com.microsoft.Outlook'
-run = 'move-node-to-workspace C'
-
-[[on-window-detected]]
-if.app-id = 'com.tinyspeck.slackmacgap'
-run = 'move-node-to-workspace C'
-
-# Debug apps
-[[on-window-detected]]
-if.app-id = 'org.RedisLabs.RedisInsight-V2'
-run = 'move-node-to-workspace 1'
-
-[[on-window-detected]]
-if.app-id = 'com.postmanlabs.mac'
-run = 'move-node-to-workspace B'
-
-[[on-window-detected]]
-if.app-id = 'de.beyondco.tinkerwell'
-run = 'move-node-to-workspace 1'
-
-[[on-window-detected]]
-if.app-id = 'com.tinyapp.TablePlus'
-run = 'move-node-to-workspace 1'
 
 # 'service' binding mode declaration.
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
