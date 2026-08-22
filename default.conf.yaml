@@ -39,7 +39,11 @@
     - description: Install submodules
       command: "git submodule update --init --recursive"
     - description: Install TPM
-      command: '[ ! -d "~/.tmux/plugins/tpm" ] || git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm'
+      command: '[ -d "$HOME/.tmux/plugins/tpm" ] || git clone https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"'
+    - description: Install Oh My Zsh
+      command: "zsh/install-omz.sh"
+    - description: Install tmuxifier
+      command: "zsh/install-tmuxifier.sh"
     - description: Installing ZSH plugins
       command: "zsh/zsh-plugins.sh"
     - description: Install MacOS Defaults

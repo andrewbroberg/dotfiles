@@ -28,7 +28,9 @@ plugins=(
     zsh-autosuggestions
 )
 
-source $ZSH/oh-my-zsh.sh
+if [[ -f "$ZSH/oh-my-zsh.sh" ]]; then
+    source $ZSH/oh-my-zsh.sh
+fi
 #--------------------------------------------------------------------------
 # Configuration
 #--------------------------------------------------------------------------
@@ -155,8 +157,10 @@ if [[ -f "$HOME/.zshrc_local" ]]; then
 fi
 
 eval "$(starship init zsh)"
-export TMUXIFIER_LAYOUT_PATH="$HOME/code/dotfiles/tmux/layouts"
-eval "$(tmuxifier init -)"
+export TMUXIFIER_LAYOUT_PATH="$HOME/dotfiles/tmux/layouts"
+if command -v tmuxifier > /dev/null; then
+  eval "$(tmuxifier init -)"
+fi
 
 # Herd injected NVM configuration
 export NVM_DIR="/Users/andrew/Library/Application Support/Herd/config/nvm"
