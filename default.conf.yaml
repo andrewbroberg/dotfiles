@@ -7,6 +7,7 @@
 - create:
     - ~/.composer
     - ~/.config
+    - ~/.config/karabiner
     - ~/intelephense
     - ~/code
     - ~/.vim/undo-history
@@ -29,6 +30,7 @@
     ~/.config/phpactor: phpactor
     ~/.aerospace.toml: .aerospace.toml
     ~/.config/starship.toml : starship.toml
+    ~/.config/karabiner/karabiner.json: karabiner/karabiner.json
     ~/.agents/skills: agents/skills
     ~/.claude/skills: agents/skills
     ~/.claude/settings.json: claude/settings.json
