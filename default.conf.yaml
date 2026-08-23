@@ -34,6 +34,7 @@
     ~/.agents/skills: agents/skills
     ~/.claude/skills: agents/skills
     ~/.claude/settings.json: claude/settings.json
+    ~/.claude/statusline-command.sh: claude/statusline-command.sh
 
 - shell:
     - description: Install submodules

@@ -1,5 +1,132 @@
 {
-  "theme": "auto",
+  "env": {
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+  },
+  "permissions": {
+    "allow": [
+      "Bash(php artisan:*)",
+      "Bash(php:*)",
+      "Bash(vendor/bin/phpstan analyse:*)",
+      "WebSearch",
+      "mcp__herd__get_all_sites",
+      "mcp__laravel-boost__list-routes",
+      "mcp__laravel-boost__database-schema",
+      "Bash(vendor/bin/pint:*)",
+      "mcp__laravel-boost__database-query",
+      "mcp__laravel-boost__last-error",
+      "mcp__laravel-boost__tinker",
+      "mcp__laravel-boost__browser-logs",
+      "Bash(find:*)",
+      "Bash(xargs ls:*)",
+      "WebFetch(domain:primevue.org)",
+      "Bash(vendor/bin/pest:*)",
+      "Bash(composer info:*)",
+      "mcp__laravel-boost__search-docs",
+      "mcp__primevue__get_data_components",
+      "mcp__primevue__get_component_sections",
+      "mcp__primevue__get_component_props",
+      "mcp__primevue__get_example",
+      "Bash(grep:*)",
+      "mcp__laravel-boost__application-info",
+      "Bash(gtimeout 30 php artisan test:*)",
+      "Bash(xargs:*)",
+      "WebFetch(domain:docs.saloon.dev)",
+      "mcp__primevue__search_components",
+      "mcp__primevue__get_component",
+      "Bash(git log:*)",
+      "Bash(git checkout:*)",
+      "Bash(composer show:*)",
+      "Bash(vendor/bin/rector process:*)",
+      "Bash(composer dump-autoload *)",
+      "mcp__codegraph__*"
+    ],
+    "deny": [
+      "Workflow",
+      "DesignSync",
+      "NotebookEdit"
+    ],
+    "ask": [],
+    "defaultMode": "auto"
+  },
+  "model": "sonnet",
+  "disableClaudeAiConnectors": true,
+  "skillOverrides": {
+    "code-review": "off"
+  },
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "codegraph prompt-hook"
+          }
+        ]
+      }
+    ]
+  },
+  "disableArtifact": true,
+  "enableWorkflows": false,
+  "workflowKeywordTriggerEnabled": false,
+  "statusLine": {
+    "type": "command",
+    "command": "bash ~/.claude/statusline-command.sh",
+    "padding": 0,
+    "refreshInterval": 10
+  },
+  "enabledPlugins": {
+    "typescript-lsp@claude-plugins-official": true,
+    "php-lsp@claude-plugins-official": true,
+    "security-guidance@claude-plugins-official": true,
+    "frontend-design@claude-plugins-official": true,
+    "claude-md-management@claude-plugins-official": true,
+    "claude-security@claude-plugins-official": true,
+    "andrej-karpathy-skills@karpathy-skills": false,
+    "superpowers@claude-plugins-official": false,
+    "mattpocock-skills@claude-plugins-official": true,
+    "ponytail@ponytail": true
+  },
+  "extraKnownMarketplaces": {
+    "expo-plugins": {
+      "source": {
+        "source": "github",
+        "repo": "expo/skills"
+      }
+    },
+    "mattpocock": {
+      "source": {
+        "source": "github",
+        "repo": "mattpocock/skills"
+      }
+    },
+    "karpathy-skills": {
+      "source": {
+        "source": "github",
+        "repo": "forrestchang/andrej-karpathy-skills"
+      }
+    },
+    "ponytail": {
+      "source": {
+        "source": "github",
+        "repo": "DietrichGebert/ponytail"
+      }
+    }
+  },
+  "alwaysThinkingEnabled": true,
+  "effortLevel": "high",
   "tui": "fullscreen",
-  "outputStyle": "Concise"
+  "voice": {
+    "enabled": true,
+    "mode": "hold"
+  },
+  "autoMemoryEnabled": false,
+  "theme": "auto",
+  "autoCompactEnabled": false,
+  "remoteControlAtStartup": true,
+  "agentPushNotifEnabled": true,
+  "skipAutoPermissionPrompt": true,
+  "voiceEnabled": true,
+  "feedbackSurveyState": {
+    "lastShownTime": 1754265223230
+  }
 }
