@@ -22,6 +22,9 @@ defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
 # Disable smart dashes as they’re annoying when typing code
 defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
 
+# Disable "natural" (reversed) scrolling direction
+defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
+
 ###############################################################################
 # SSD-specific tweaks                                                         #
 ###############################################################################
