@@ -157,7 +157,7 @@ if [[ -f "$HOME/.zshrc_local" ]]; then
 fi
 
 eval "$(starship init zsh)"
-export TMUXIFIER_LAYOUT_PATH="$HOME/dotfiles/tmux/layouts"
+export TMUXIFIER_LAYOUT_PATH="$HOME/code/dotfiles/tmux/layouts"
 if command -v tmuxifier > /dev/null; then
   eval "$(tmuxifier init -)"
 fi
