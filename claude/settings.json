@@ -48,7 +48,7 @@
     "ask": [],
     "defaultMode": "auto"
   },
-  "model": "sonnet",
+  "model": "opus",
   "disableClaudeAiConnectors": true,
   "skillOverrides": {
     "code-review": "off"
@@ -82,7 +82,6 @@
     "claude-md-management@claude-plugins-official": true,
     "claude-security@claude-plugins-official": true,
     "andrej-karpathy-skills@karpathy-skills": false,
-    "superpowers@claude-plugins-official": false,
     "mattpocock-skills@claude-plugins-official": true,
     "ponytail@ponytail": true
   },
@@ -114,6 +113,11 @@
   },
   "alwaysThinkingEnabled": true,
   "effortLevel": "high",
+  "modelSettings": {
+    "claude-fable-5": {
+      "effortLevel": "high"
+    }
+  },
   "tui": "fullscreen",
   "voice": {
     "enabled": true,
