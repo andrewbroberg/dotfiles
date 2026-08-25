@@ -19,7 +19,7 @@ return {
         local capabilities = require('blink.cmp').get_lsp_capabilities()
 
         require('mason-lspconfig').setup({
-            ensure_installed = { "taplo" },
+            ensure_installed = { "taplo", "intelephense" },
             automatic_installation = true
         })
 
@@ -44,30 +44,30 @@ return {
         })
         vim.lsp.enable("taplo")
 
-        -- vim.lsp.config("intelephense", {
-        --     cmd = { "intelephense", "--stdio" },
-        --     filetypes = { "php" },
-        --     capabilities = capabilities,
-        --     commands = {
-        --         IntelephenseIndex = {
-        --             function()
-        --                 vim.lsp.buf.execute_command({ command = 'intelephense.index.workspace' })
-        --             end,
-        --         },
-        --     },
-        --     settings = {
-        --         intelephense = {
-        --             telemetry = {
-        --                 enabled = false
-        --             },
-        --             files = {
-        --                 maxSize = 5000000
-        --             }
-        --         }
-        --     },
-        -- })
+        vim.lsp.config("intelephense", {
+            cmd = { "intelephense", "--stdio" },
+            filetypes = { "php" },
+            capabilities = capabilities,
+            commands = {
+                IntelephenseIndex = {
+                    function()
+                        vim.lsp.buf.execute_command({ command = 'intelephense.index.workspace' })
+                    end,
+                },
+            },
+            settings = {
+                intelephense = {
+                    telemetry = {
+                        enabled = false
+                    },
+                    files = {
+                        maxSize = 5000000
+                    }
+                }
+            },
+        })
 
-        -- vim.lsp.enable("intelephense", true)
+        vim.lsp.enable("intelephense")
 
         -- vim.lsp.config['phpantom'] = {
         --     cmd = { '/Users/andrew/code/phpantom_lsp/target/release/phpantom_lsp' },
