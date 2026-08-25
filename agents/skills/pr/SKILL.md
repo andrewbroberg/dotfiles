@@ -52,7 +52,7 @@ Whether using a repo template or the fallback: confirm all section headings are 
 
 ### Step 7: Push and Create PR
 
-Optional arguments: `--base {branch}` (default: master), `--draft` (create as draft), `--no-push` (generate description only).
+Optional arguments: `--base {branch}` (default: main), `--draft` (create as draft), `--no-push` (generate description only).
 
 ```bash
 git push -u origin $(git branch --show-current)
