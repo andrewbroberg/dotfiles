@@ -13,6 +13,7 @@ brew "lazygit"
 brew "gh"
 brew "gpg"
 brew "bat"
+brew "rust"
 brew "shivammathur/extensions/grpc@8.4"
 brew "shivammathur/extensions/grpc@8.5"
 
