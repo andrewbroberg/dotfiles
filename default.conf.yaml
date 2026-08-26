@@ -63,6 +63,13 @@
       command: "zsh/zsh-plugins.sh"
     - description: Install MacOS Defaults
       command: "shell/macos/defaults.sh"
+    - description: Install herdr Claude integration
+      command: |
+       if command -v herdr &> /dev/null; then
+         herdr integration install claude
+       fi
+      stdout: true
+      stderr: true
     - description: Install codegraph
       command: |
        if ! command -v codegraph &> /dev/null; then
