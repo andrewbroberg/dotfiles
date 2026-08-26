@@ -19,8 +19,8 @@ return {
         local capabilities = require('blink.cmp').get_lsp_capabilities()
 
         require('mason-lspconfig').setup({
-            ensure_installed = { "taplo", "intelephense" },
-            automatic_installation = true
+            ensure_installed = { "taplo", "intelephense", "vtsls", "vue_ls" },
+            automatic_enable = { exclude = { "intelephense" } }
         })
 
         vim.lsp.config("bashls", {
