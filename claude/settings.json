@@ -49,7 +49,7 @@
     "ask": [],
     "defaultMode": "auto"
   },
-  "model": "opus",
+  "model": "fable",
   "disableClaudeAiConnectors": true,
   "skillOverrides": {
     "code-review": "off"
