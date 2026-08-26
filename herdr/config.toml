@@ -1,0 +1,19 @@
+onboarding = false
+[theme]
+auto_switch = true
+dark_name = "tokyo-night"
+light_name = "tokyo-night-day"
+
+[keys]
+prefix = "ctrl+space"
+focus_pane_left = "ctrl+h"
+focus_pane_down = "ctrl+j"
+focus_pane_up = "ctrl+k"
+focus_pane_right = "ctrl+l"
+
+[[keys.command]]
+key = "prefix+f"
+type = "popup"
+command = "h"
+width = "60%"
+height = "50%"

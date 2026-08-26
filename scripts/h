@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+# Herdr equivalent of `t`: nvim (left) | claude (right)
+
+set -euo pipefail
+
+if [[ $# -eq 1 ]]; then
+    selected=$1
+else
+    items=$(find ~/code -maxdepth 1 -mindepth 1 -type d)
+    items+=$'\n/tmp'
+    selected=$(echo "$items" | fzf)
+fi
+
+[[ -z ${selected:-} ]] && exit
+
+name=$(basename "$selected" | sed 's/\./_/g')
+
+existing=$(herdr workspace list | jq -r --arg n "$name" '.result.workspaces[] | select(.label == $n) | .workspace_id' | head -1)
+if [[ -n $existing ]]; then
+    herdr workspace focus "$existing" >/dev/null
+    exit
+fi
+
+left=$(herdr workspace create --cwd "$selected" --label "$name" --focus | jq -r '.result.root_pane.pane_id')
+right=$(herdr pane split --pane "$left" --direction right --ratio 0.5 --cwd "$selected" --no-focus | jq -r '.result.pane.pane_id')
+
+herdr pane run "$right" claude >/dev/null
+herdr pane run "$left" nvim >/dev/null

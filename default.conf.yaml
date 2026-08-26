@@ -31,6 +31,9 @@
     ~/.config/phpantom_lsp/.phpantom.toml:
       path: phpantom_lsp/.phpantom.toml
       create: true
+    ~/.config/herdr/config.toml:
+      path: herdr/config.toml
+      create: true
     ~/.aerospace.toml: .aerospace.toml
     ~/.config/starship.toml : starship.toml
     ~/.config/karabiner/karabiner.json: karabiner/karabiner.json
