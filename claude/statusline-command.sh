@@ -6,6 +6,7 @@
 input=$(cat)
 cwd=$(echo "$input"   | jq -r '.workspace.current_dir')
 model=$(echo "$input" | jq -r '.model.display_name')
+effort=$(echo "$input" | jq -r '.effort.level // empty')
 session_name=$(echo "$input" | jq -r '.session_name // empty')
 ctx_remaining=$(echo "$input" | jq -r '.context_window.remaining_percentage // empty')
 ctx_used_tokens=$(echo "$input" | jq -r '.context_window.total_input_tokens // empty')
@@ -30,6 +31,7 @@ fi
 printf '\033[36m%s\033[0m' "$dir"
 [ -n "$branch" ] && printf ' \033[35m%s\033[0m' "$branch"
 printf ' \033[2m%s\033[0m' "$model"
+[ -n "$effort" ] && printf ' \033[2m(%s)\033[0m' "$effort"
 
 # --- Session name ---
 [ -n "$session_name" ] && printf ' \033[2m%s\033[0m' "$session_name"
