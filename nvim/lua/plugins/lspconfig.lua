@@ -67,16 +67,16 @@ return {
             },
         })
 
-        vim.lsp.enable("intelephense")
+        -- vim.lsp.enable("intelephense")
 
-        -- vim.lsp.config['phpantom'] = {
-        --     cmd = { '/Users/andrew/code/phpantom_lsp/target/release/phpantom_lsp' },
-        --     filetypes = { 'php' },
-        --     root_markers = { 'composer.json', '.git' },
-        --     capabilities = capabilities
-        -- }
+        vim.lsp.config['phpantom'] = {
+            cmd = { '/Users/andrew/code/phpantom_lsp/target/release/phpantom_lsp' },
+            filetypes = { 'php' },
+            root_markers = { '.git', 'composer.json' },
+            capabilities = capabilities
+        }
 
-        -- vim.lsp.enable('phpantom', true)
+        vim.lsp.enable('phpantom', true)
 
         vim.lsp.config("laravel_lsp", {
             cmd = { "laravel-lsp" },

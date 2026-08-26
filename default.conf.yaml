@@ -28,6 +28,9 @@
     ~/.gitconfig: git/gitconfig
     ~/.ssh/config: ssh/config
     ~/.config/phpactor: phpactor
+    ~/.config/phpantom_lsp/.phpantom.toml:
+      path: phpantom_lsp/.phpantom.toml
+      create: true
     ~/.aerospace.toml: .aerospace.toml
     ~/.config/starship.toml : starship.toml
     ~/.config/karabiner/karabiner.json: karabiner/karabiner.json
