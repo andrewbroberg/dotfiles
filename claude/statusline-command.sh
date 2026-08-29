@@ -74,6 +74,7 @@ if [ -n "$rl_5h" ] || [ -n "$rl_7d" ]; then
         [ -n "$rl_out" ] && rl_out="$rl_out · $rl_7d_fmt" || rl_out="$rl_7d_fmt"
     fi
     printf ' \033[2m%s\033[0m' "$rl_out"
+    mkdir -p "$HOME/.cache" && printf '%s\n' "$rl_out" > "$HOME/.cache/claude-usage"
 fi
 
 # --- Last message time (relative age from transcript) ---

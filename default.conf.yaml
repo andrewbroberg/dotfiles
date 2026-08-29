@@ -70,12 +70,26 @@
        fi
       stdout: true
       stderr: true
+    - description: Install herdr-nvim plugin
+      command: |
+       if command -v herdr &> /dev/null; then
+         herdr plugin install ChmaraX/herdr-nvim --yes
+       fi
+      stdout: true
+      stderr: true
     - description: Install codegraph
       command: |
        if ! command -v codegraph &> /dev/null; then
          curl -fsSL https://raw.githubusercontent.com/colbymchenry/codegraph/main/install.sh | sh
        fi
       stdin: true
+      stdout: true
+      stderr: true
+    - description: Install arbor zsh completion
+      command: |
+       if command -v arbor &> /dev/null; then
+         arbor completion zsh > "$(brew --prefix)/share/zsh/site-functions/_arbor"
+       fi
       stdout: true
       stderr: true
 

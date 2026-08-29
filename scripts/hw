@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+projects=$(find ~/code -maxdepth 2 -mindepth 2 -type d -name .bare | xargs -n1 dirname)
+[[ -z $projects ]] && { echo "no arbor projects in ~/code"; exit 1; }
+
+selected=$(echo "$projects" | fzf)
+[[ -z ${selected:-} ]] && exit
+
+cd "$selected"
+exec arbor work

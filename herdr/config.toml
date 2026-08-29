@@ -1,9 +1,10 @@
 onboarding = false
 [theme]
-auto_switch = true
-dark_name = "tokyo-night"
-light_name = "tokyo-night-day"
+auto_switch = false
+dark_name = "one-dark"
+light_name = "one-light"
 
+name = "one-dark"
 [keys]
 prefix = "ctrl+space"
 focus_pane_left = "ctrl+h"
@@ -17,3 +18,32 @@ type = "popup"
 command = "h"
 width = "60%"
 height = "50%"
+
+[[keys.command]]
+key = "prefix+w"
+type = "popup"
+command = "hw"
+width = "60%"
+height = "50%"
+description = "arbor worktree workspace"
+
+[ui]
+sidebar_max_width = 60
+
+agent_panel_sort = "priority"
+[[ui.tab_bar_right]]
+type = "command"
+command = "cat ~/.cache/claude-usage 2>/dev/null"
+interval_seconds = 30
+
+[[keys.command]]
+key = "prefix+e"
+type = "plugin_action"
+command = "chmarax.herdr-nvim.toggle"
+description = "nvim sidebar"
+
+[[keys.command]]
+key = "prefix+o"
+type = "plugin_action"
+command = "chmarax.herdr-nvim.pick-file"
+description = "open file from agent output"
