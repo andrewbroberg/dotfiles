@@ -9,11 +9,26 @@ return {
     { '<Leader>tv', ':silent TestVisit<CR>' },
   },
 
-  dependencies = { 'preservim/vimux' },
-
   config = function()
-    vim.cmd([[
-      let test#strategy = 'vimux'
-    ]])
-  end
+    local pane
+
+    local function pane_alive()
+      return pane and vim.system({ 'herdr', 'pane', 'get', pane }):wait().code == 0
+    end
+
+    vim.g['test#custom_strategies'] = {
+      herdr = function(cmd)
+        if not pane_alive() then
+          local out = vim.system({
+            'herdr', 'pane', 'split', '--current',
+            '--direction', 'down', '--ratio', '0.25', '--no-focus',
+          }):wait()
+          pane = vim.json.decode(out.stdout).result.pane.pane_id
+        end
+        vim.system({ 'herdr', 'pane', 'run', pane, cmd })
+      end,
+    }
+
+    vim.g['test#strategy'] = vim.env.HERDR_PANE_ID and 'herdr' or 'basic'
+  end,
 }
