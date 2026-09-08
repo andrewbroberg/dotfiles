@@ -44,6 +44,10 @@ Use the template from Step 2. Populate each section from available sources (SUMM
 - **All template sections must be present** — never remove a section from the template, even if it doesn't apply.
 - **Inapplicable sections get `N/A`** — write exactly `N/A` with no qualifier, explanation, or elaboration (not "N/A — backend only", not "No screenshots needed", just `N/A`).
 
+#### Issue Reference
+
+The body must always state the originating issue: a `Closes #N` line (find the issue number from the branch name, commit messages, or by asking the user). If there is genuinely no originating issue, write exactly `No originating issue.` instead. Review tooling (e.g. `/code-review`'s Spec axis) reads this line to locate the spec — never omit it.
+
 **Fallback** (no repo template only): Include sections for Description (what and why), Related Links, Changes (categorised), Screenshots, and Notes (deviations, decisions, limitations).
 
 ### Step 6: Verify Template Compliance
