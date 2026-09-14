@@ -1,4 +1,4 @@
-theme = light:onenord-light,dark:onenord
+theme = light:Onenord Light,dark:Onenord
 font-size = 14
 adjust-cell-height = 20
 cursor-style = bar
