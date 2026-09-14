@@ -9,15 +9,20 @@
     "sessionUrl": false
   },
   "permissions": {
+    "allow": [
+      "mcp__codegraph__*"
+    ],
     "deny": [
       "Workflow",
+      "ScheduleWakeup",
+      "Artifact",
       "DesignSync",
       "NotebookEdit"
     ],
     "ask": [],
     "defaultMode": "auto"
   },
-  "model": "fable",
+  "model": "claude-fable-5-1[1m]",
   "disableClaudeAiConnectors": true,
   "skillOverrides": {
     "code-review": "off"
@@ -44,6 +49,17 @@
           }
         ]
       }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "rtk hook claude"
+          }
+        ]
+      }
     ]
   },
   "disableArtifact": true,
@@ -62,7 +78,7 @@
     "security-guidance@claude-plugins-official": true,
     "frontend-design@claude-plugins-official": true,
     "claude-md-management@claude-plugins-official": true,
-    "claude-security@claude-plugins-official": true,
+    "claude-security@claude-plugins-official": false,
     "andrej-karpathy-skills@karpathy-skills": false,
     "mattpocock-skills@claude-plugins-official": true,
     "ponytail@ponytail": true
@@ -103,6 +119,9 @@
   "effortLevel": "high",
   "modelSettings": {
     "claude-fable-5": {
+      "effortLevel": "high"
+    },
+    "claude-fable-5-1": {
       "effortLevel": "high"
     }
   },
