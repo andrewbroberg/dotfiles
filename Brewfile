@@ -16,6 +16,8 @@ brew "bat"
 brew "rust"
 brew "shivammathur/extensions/grpc@8.4"
 brew "shivammathur/extensions/grpc@8.5"
+brew "shivammathur/extensions/pcov@8.4"
+brew "shivammathur/extensions/pcov@8.5"
 
 cask "1password"
 cask "1password-cli"
