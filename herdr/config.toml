@@ -1,10 +1,10 @@
 onboarding = false
-[theme]
-auto_switch = false
-dark_name = "one-dark"
-light_name = "one-light"
 
-name = "one-dark"
+[theme]
+name = "one-light"
+light_name = "one-light"
+dark_name = "one-dark"
+auto_switch = true
 [keys]
 prefix = "ctrl+space"
 focus_pane_left = "ctrl+h"
